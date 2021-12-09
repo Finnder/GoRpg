@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	pm "gorpg/PlayerManager"
+	em "gorpg/Managers/EnemyManager"
+	pm "gorpg/Managers/PlayerManager"
 	"os"
 	"os/exec"
 
@@ -23,6 +24,8 @@ func Menu() {
 
 	userInput := ""
 
+	em.GetTwitchViewers()
+
 	// Entry Menu Text
 	color.Yellow("Welcome to Golang RPG!!!")
 	fmt.Println("1. Begin")
@@ -41,6 +44,8 @@ func Menu() {
 		if userInput == "1" {
 			// Loads Player Data
 			pm.LoadPlayer()
+			pm.ListPlayerData()
+
 		} else {
 			// Creates New Player and Saves Data
 			pm.NewPlayer()

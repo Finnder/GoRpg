@@ -1,4 +1,11 @@
 TODO LIST
 ---------
 
+December 8th 2021 -
+    1. Load character file data -> assign to local variables (COMPLETE)
+ 
+December xth 2021 - 
+    1. Enemy System -> turn based combat system
+    2. Combat System -> rouge like, items and buffs (simple for now)
+    3. Leveling System -> saves player data back to file
 
