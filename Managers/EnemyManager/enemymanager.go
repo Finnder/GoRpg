@@ -1,17 +1,18 @@
 package EnemyManager
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"time"
+	"math/rand"
+	"strconv"
+
+	"github.com/fatih/color"
 )
 
 type Enemy struct {
 	Name      string
 	Level     int
-	AttackDmg float64
-	Health    float64
+	AttackDmg int
+	Health    int
 }
 
 type TwitchResponse struct {
@@ -20,29 +21,29 @@ type TwitchResponse struct {
 	ChatterCount   string `json:"chatter_count"`
 }
 
-var EnemyNames = []string{""}
+var enemyNames = []string{"Joe"}
 
-var myClient = &http.Client{Timeout: 10 * time.Second}
-
-func getJson(url string, target interface{}) error {
-	r, err := myClient.Get(url)
-	if err != nil {
-		return err
-	}
-	defer r.Body.Close()
-
-	return json.NewDecoder(r.Body).Decode(target)
+func RandomName() string {
+	var rng_enemy_names int = rand.Intn(len(enemyNames))
+	return enemyNames[rng_enemy_names]
 }
 
-// When we want encounter of enemy to being do this
-func EnemyEncounterBegin() {
+// Begins Enemy Ecounter
+func EnemyEncounterBegin(level int) {
+	var enemy Enemy = Enemy{RandomName(), level, level * 2, level * 10}
+
+	fmt.Println(enemy)
+	color.Red("A level " + strconv.Itoa(level) + " enemy apeared!")
 
 }
 
-func GetTwitchViewers() {
+func PlayerTurnBegins() {
 
-	foo1 := TwitchResponse{}
-	getJson("https://tmi.twitch.tv/group/user/finnder7/chatters", &foo1)
-	fmt.Println(foo1.ChatterCount)
+	fmt.Println("Your Turn Has Began!")
 
+}
+
+func EnemyTurnBegins() {
+
+	fmt.Println("It is now the enemys turn")
 }

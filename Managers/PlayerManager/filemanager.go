@@ -66,7 +66,6 @@ func SavePlayerData(player Player) {
 	f.WriteString(playerXp + "\n")
 	f.WriteString(playerMaxXp + "\n")
 	f.WriteString(playerAttackDmg + "\n")
-
 	f.Close()
 }
 

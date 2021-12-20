@@ -24,8 +24,6 @@ func Menu() {
 
 	userInput := ""
 
-	em.GetTwitchViewers()
-
 	// Entry Menu Text
 	color.Yellow("Welcome to Golang RPG!!!")
 	fmt.Println("1. Begin")
@@ -46,9 +44,13 @@ func Menu() {
 			pm.LoadPlayer()
 			pm.ListPlayerData()
 
+			em.EnemyEncounterBegin(1)
+
 		} else {
 			// Creates New Player and Saves Data
 			pm.NewPlayer()
+			pm.LoadPlayer()
+			pm.ListPlayerData()
 		}
 
 	} else {
