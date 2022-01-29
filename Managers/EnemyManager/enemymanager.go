@@ -13,15 +13,11 @@ type Enemy struct {
 	Level     int
 	AttackDmg int
 	Health    int
-}
-
-type TwitchResponse struct {
-	TwitchUsername string `json:"viewers"`
-	Broadcaster    string `json:"broadcaster"`
-	ChatterCount   string `json:"chatter_count"`
+	XPGain    int
 }
 
 var enemyNames = []string{"Joe"}
+var enemyXPMultiplier = 1
 
 func RandomName() string {
 	var rng_enemy_names int = rand.Intn(len(enemyNames))
@@ -30,7 +26,7 @@ func RandomName() string {
 
 // Begins Enemy Ecounter
 func EnemyEncounterBegin(level int) {
-	var enemy Enemy = Enemy{RandomName(), level, level * 2, level * 10}
+	var enemy Enemy = Enemy{RandomName(), level, level * 2, level * 10, level * enemyXPMultiplier}
 
 	fmt.Println(enemy)
 	color.Red("A level " + strconv.Itoa(level) + " enemy apeared!")
@@ -46,4 +42,9 @@ func PlayerTurnBegins() {
 func EnemyTurnBegins() {
 
 	fmt.Println("It is now the enemys turn")
+}
+
+func EnemyEncounterEnds() {
+	fmt.Println("You defeated the enemy!")
+
 }
