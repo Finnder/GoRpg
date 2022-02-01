@@ -24,6 +24,7 @@ var PlayerXp int = 0
 var PlayerMaxXp int = 0
 var PlayerAttackDmg int = 0
 
+// Player Object
 type Player struct {
 	Name      string
 	Level     int
@@ -32,9 +33,11 @@ type Player struct {
 	AttackDmg int
 }
 
+// File path
 var filePathPlayerData string = "./Saved/PlayerData/"
 var PlayerChoosenFilePath string = filePathPlayerData
 
+// List out players data
 func ListPlayerData() {
 	title := color.New(color.FgGreen, color.Bold)
 
@@ -43,9 +46,9 @@ func ListPlayerData() {
 	fmt.Println("Name: ", PlayerName)
 	fmt.Println("Level: ", PlayerLevel)
 	fmt.Println("XP:", PlayerXp, "/", PlayerMaxXp)
-
 }
 
+// Save the players info
 func SavePlayerData(player Player) {
 
 	// declare local data and covert player struct ints into Strings
@@ -69,22 +72,28 @@ func SavePlayerData(player Player) {
 	f.Close()
 }
 
+// When we want to create a new player
 func NewPlayer() {
 
+	// Default variables
 	var playerName string = ""
 	var playerLevel int = 0
 	var playerXP int = 0
 	var playerMaxXP int = 5
 	var attackDmg int = 1
 
+	// Get user input
 	fmt.Println("Please Enter New Your Characters Name: ")
 	fmt.Scan(&playerName)
 
+	// Create player object
 	var player Player = Player{playerName, playerLevel, playerXP, playerMaxXP, attackDmg}
 
-	SavePlayerData(player) // Saves Player Info
+	// Saves Player Info
+	SavePlayerData(player)
 }
 
+// Load Player variables back into game
 func LoadPlayer() {
 
 	var userInput string = ""
@@ -109,6 +118,7 @@ func LoadPlayer() {
 	if userInput != "" {
 		for _, file := range files {
 			if userInput == file.Name() {
+
 				// Assign file data to global variables
 				selectedFile, err := os.Open(filePathPlayerData + file.Name())
 				check(err)
@@ -138,7 +148,7 @@ func LoadPlayer() {
 		}
 	} else {
 		fmt.Print("Please Enter A Valid File Name!")
-		LoadPlayer()
+		LoadPlayer() // Reload function and ask for character to load
 	}
 
 }
