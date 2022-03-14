@@ -1,6 +1,5 @@
 TODO LIST
 ---------
-
 December 8th 2021 -
     1. Load character file data -> assign to local variables (COMPLETE)
  

@@ -33,6 +33,9 @@ type Player struct {
 	AttackDmg int
 }
 
+// Global Player
+var player Player
+
 // File path
 var filePathPlayerData string = "./Saved/PlayerData/"
 var PlayerChoosenFilePath string = filePathPlayerData
@@ -52,10 +55,12 @@ func ListPlayerData() {
 func SavePlayerData(player Player) {
 
 	// declare local data and covert player struct ints into Strings
-	var playerlevel string = strconv.Itoa(player.Level)
-	var playerXp string = strconv.Itoa(player.XP)
-	var playerMaxXp string = strconv.Itoa(player.MaxXP)
-	var playerAttackDmg string = strconv.Itoa(player.AttackDmg)
+	var (
+		playerlevel     string = strconv.Itoa(player.Level)
+		playerXp        string = strconv.Itoa(player.XP)
+		playerMaxXp     string = strconv.Itoa(player.MaxXP)
+		playerAttackDmg string = strconv.Itoa(player.AttackDmg)
+	)
 
 	// If the file doesn't exist, create it, or append to the file
 	f, err := os.OpenFile(filePathPlayerData+player.Name+".dat", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -86,8 +91,8 @@ func NewPlayer() {
 	fmt.Println("Please Enter New Your Characters Name: ")
 	fmt.Scan(&playerName)
 
-	// Create player object
-	var player Player = Player{playerName, playerLevel, playerXP, playerMaxXP, attackDmg}
+	// Assign global player variable to current player
+	player = Player{playerName, playerLevel, playerXP, playerMaxXP, attackDmg}
 
 	// Saves Player Info
 	SavePlayerData(player)

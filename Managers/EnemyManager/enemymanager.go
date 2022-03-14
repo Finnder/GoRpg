@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"time"
 
 	"github.com/fatih/color"
 )
@@ -26,11 +27,22 @@ func RandomName() string {
 
 // Begins Enemy Ecounter
 func EnemyEncounterBegin(level int) {
-	var enemy Enemy = Enemy{RandomName(), level, level * 2, level * 10, level * enemyXPMultiplier}
+
+	// Create enemy
+	var (
+		enemyName      string = RandomName()
+		enemyLevel     int    = level
+		enemyAttackDmg int    = level * 2.0
+		enemyHealth    int    = level * 10.0
+		enemyXPGain    int    = level * enemyXPMultiplier
+	)
+
+	// Instatiate Enemy
+	var enemy Enemy = Enemy{enemyName, enemyLevel, enemyAttackDmg, enemyHealth, enemyXPGain}
 
 	fmt.Println(enemy)
 	color.Red("A level " + strconv.Itoa(level) + " enemy apeared!")
-
+	PlayerTurnBegins()
 }
 
 func PlayerTurnBegins() {
@@ -39,12 +51,17 @@ func PlayerTurnBegins() {
 
 }
 
-func EnemyTurnBegins() {
+func SelectMoves() {
 
+}
+
+func EnemyTurnBegins() {
 	fmt.Println("It is now the enemys turn")
+	time.Sleep(2 * time.Second)
+	fmt.Println("Enemy is now deciding what to do...")
+	time.Sleep(4 * time.Second)
 }
 
 func EnemyEncounterEnds() {
 	fmt.Println("You defeated the enemy!")
-
 }
